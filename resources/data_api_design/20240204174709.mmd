@@ -1,0 +1,33 @@
+
+classDiagram
+    class Main {
+        +main() void
+    }
+    class Game {
+        -score int
+        -high_score int
+        -board list
+        +start_game() void
+        +reset_game() void
+        +make_move(direction: str) bool
+        +undo_move() bool
+    }
+    class UI {
+        +draw_board(board: list) void
+        +display_score(score: int) void
+        +display_high_score(high_score: int) void
+        +get_user_input() str
+    }
+    class Logic {
+        +generate_new_tile(board: list) list
+        +merge_tiles(board: list, direction: str) tuple
+    }
+    class Constants {
+        +BOARD_SIZE int
+        +INITIAL_TILES int
+    }
+    Main --> Game
+    Game --> UI
+    Game --> Logic
+    UI --> Constants
+    Logic --> Constants

@@ -1,0 +1,22 @@
+
+sequenceDiagram
+    participant M as Main
+    participant G as Game
+    participant U as UI
+    participant L as Logic
+    M->>G: start_game()
+    loop Game Loop
+        G->>U: draw_board(board)
+        U->>U: display_score(score)
+        U->>U: display_high_score(high_score)
+        U->>G: get_user_input()
+        alt Valid Move
+            G->>L: merge_tiles(board, direction)
+            L->>G: return new_board, score_increment
+            G->>G: update board and score
+            G->>L: generate_new_tile(board)
+            L->>G: return new_board
+        else Invalid Move
+            G->>U: draw_board(board)  # Redraw unchanged board
+        end
+    end
